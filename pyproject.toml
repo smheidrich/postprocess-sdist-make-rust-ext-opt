@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "postprocess-sdist-make-rust-ext-opt"
+version = "0.1.0"
+description = "Post-process sdists to make Rust extensions optional"
+authors = ["smheidrich <smheidrich@weltenfunktion.de>"]
+packages = [
+  { include = "postprocess_sdist_make_rust_ext_opt.py" }
+]
+
+[tool.poetry.scripts]
+postprocess-sdist-make-rust-ext-opt = 'postprocess_sdist_make_rust_ext_opt:app'
+
+[tool.poetry.dependencies]
+python = "^3.9"
+typer = "^0.6.1"
+redbaron = "^0.9.2"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
