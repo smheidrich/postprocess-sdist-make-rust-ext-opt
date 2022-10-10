@@ -157,6 +157,30 @@ python-versions = "*"
 appdirs = "*"
 
 [[package]]
+name = "semantic-version"
+version = "2.10.0"
+description = "A library implementing the 'SemVer' scheme."
+category = "dev"
+optional = false
+python-versions = ">=2.7"
+
+[package.extras]
+dev = ["Django (>=1.11)", "nose2", "tox", "check-manifest", "coverage", "flake8", "wheel", "zest.releaser", "readme-renderer (<25.0)", "colorama (<=0.4.1)"]
+doc = ["sphinx", "sphinx-rtd-theme"]
+
+[[package]]
+name = "setuptools-rust"
+version = "1.5.2"
+description = "Setuptools Rust extension plugin"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
+[package.dependencies]
+semantic-version = ">=2.8.2,<3"
+typing-extensions = ">=3.7.4.3"
+
+[[package]]
 name = "tomli"
 version = "2.0.1"
 description = "A lil' TOML parser"
@@ -181,10 +205,18 @@ doc = ["mdx-include (>=1.4.1,<2.0.0)", "mkdocs-material (>=8.1.4,<9.0.0)", "mkdo
 dev = ["pre-commit (>=2.17.0,<3.0.0)", "flake8 (>=3.8.3,<4.0.0)", "autoflake (>=1.3.1,<2.0.0)"]
 all = ["rich (>=10.11.0,<13.0.0)", "shellingham (>=1.3.0,<2.0.0)", "colorama (>=0.4.3,<0.5.0)"]
 
+[[package]]
+name = "typing-extensions"
+version = "4.4.0"
+description = "Backported and Experimental Type Hints for Python 3.7+"
+category = "dev"
+optional = false
+python-versions = ">=3.7"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "b4a3b320aeb8428256e37b09d3d0f686f947ea61b065335f2852159055d42d59"
+content-hash = "0ff401aaf0a7fde585391fcb7aac518c36574451988c8464377c4a3fdf1c50bd"
 
 [metadata.files]
 appdirs = [
@@ -215,8 +247,11 @@ pytest = []
 pytest-datafixtures = []
 redbaron = []
 rply = []
+semantic-version = []
+setuptools-rust = []
 tomli = [
     {file = "tomli-2.0.1-py3-none-any.whl", hash = "sha256:939de3e7a6161af0c887ef91b7d41a53e7c5a1ca976325f429cb46ea9bc30ecc"},
     {file = "tomli-2.0.1.tar.gz", hash = "sha256:de526c12914f0c550d15924c62d72abc48d6fe7364aa87328337a31007fe8a4f"},
 ]
 typer = []
+typing-extensions = []
