@@ -11,7 +11,7 @@ packages = [
 postprocess-sdist-make-rust-ext-opt = 'postprocess_sdist_make_rust_ext_opt:app'
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.8"
 typer = "^0.6.1"
 redbaron = "^0.9.2"
 
