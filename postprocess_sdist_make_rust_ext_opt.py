@@ -1,6 +1,7 @@
 import tarfile
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from typing import List, Optional
 
 import typer
 from redbaron import RedBaron
@@ -21,14 +22,56 @@ def one(iterable):
     return x
 
 
-@app.command()
+@app.command(
+    help="Post-process a Python sdist to make its Rust extensions optional"
+)
 def postprocess(
-    sdist_path: str = typer.Argument(
-        "path of the sdist .tar.gz archive to post-process"
+    sdist_paths: List[Path] = typer.Argument(
+        ...,
+        help="path(s) of sdist .tar.gz archive(s) to post-process",
+        exists=True,
+        dir_okay=False,
+    ),
+    output_dir: Optional[Path] = typer.Option(
+        None,
+        "--output-dir",
+        "-O",
+        help="directory in which to place the post-processed archives "
+        "(default: directory named 'postprocess' in input sdist directory)",
+        file_okay=False,
+    ),
+    create_output_dir: bool = typer.Option(
+        False,
+        "--create-output-dir",
+        "-C",
+        help="whether to create the output directory (and its parents) if it "
+        "does not exist",
+    ),
+    force: bool = typer.Option(
+        False,
+        "--force",
+        "-f",
+        help="whether to overwrite existing files in the output directory",
     ),
 ):
-    sdist_path = Path(sdist_path)
-    output_sdist_path = sdist_path.parent / "postprocessed" / sdist_path.name
+    for sdist_path in sdist_paths:
+        postprocess_sdist(
+            Path(sdist_path), output_dir, create_output_dir, force
+        )
+
+
+def postprocess_sdist(
+    sdist_path: Path,
+    output_dir_path: Optional[Path] = None,
+    create_output_dir: bool = False,
+    overwrite: bool = False,
+):
+    output_dir_path = (
+        output_dir_path
+        if output_dir_path is not None
+        else sdist_path.parent / "postprocessed"
+    )
+    output_sdist_path = output_dir_path / sdist_path.name
     with TemporaryDirectory() as tmpdir:
         tmpdir_path = Path(tmpdir)
         with tarfile.open(sdist_path, "r:gz") as tar_file:
@@ -36,8 +79,10 @@ def postprocess(
         main_folder_path = one(tmpdir_path.iterdir())
         setup_py_path = main_folder_path / "setup.py"
         setup_py_path.write_text(set_optional_true(setup_py_path.read_text()))
-        output_sdist_path.parent.mkdir(exist_ok=True)
-        with tarfile.open(output_sdist_path, "w:gz") as tar_file:
+        if create_output_dir:
+            output_dir_path.mkdir(exist_ok=True, parents=True)
+        mode = "w:gz" if overwrite else "x:gz"
+        with tarfile.open(output_sdist_path, mode) as tar_file:
             for path in tmpdir_path.iterdir():
                 tar_file.add(path, arcname=str(path.relative_to(tmpdir_path)))
 

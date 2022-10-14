@@ -6,7 +6,7 @@ import pytest
 
 from postprocess_sdist_make_rust_ext_opt import (
     one,
-    postprocess,
+    postprocess_sdist,
     set_optional_true,
 )
 
@@ -63,8 +63,8 @@ def compare_sdists(sdist1, sdist2, ignore_filenames=None):
             ), member_name
 
 
-def test_postprocess_sdist_archive(dummy_sdist_archive):
-    postprocess(str(dummy_sdist_archive.absolute()))
+def test_postprocess_sdist(dummy_sdist_archive):
+    postprocess_sdist(dummy_sdist_archive.absolute(), create_output_dir=True)
     postprocessed_sdist_path = (
         dummy_sdist_archive.parent / "postprocessed" / dummy_sdist_archive.name
     )
