@@ -111,7 +111,7 @@ Unless otherwise specified, a processed sdist will be written to a folder named
 the same as that of the input sdist.
 
 To modify sdists in-place, you can use the combination of options
-`-fCO dir dir/*.tar.gz`, where `dir` is the directory cotaining the sdists.
+`-fO dir dir/*.tar.gz`, where `dir` is the directory cotaining the sdists.
 
 ## Caveats
 
