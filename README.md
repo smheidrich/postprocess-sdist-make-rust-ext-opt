@@ -82,12 +82,22 @@ pip install postprocess-sdist-make-rust-ext-opt
 
 ```bash
 $ postprocess-sdist-make-rust-ext-opt --help
-Usage: postprocess-sdist-make-rust-ext-opt [OPTIONS] [SDIST_PATH]
+Usage: postprocess-sdist-make-rust-ext-opt [OPTIONS] SDIST_PATHS...
+
+  Post-process a Python sdist to make its Rust extensions optional
 
 Arguments:
-  [SDIST_PATH]  [default: path of the sdist .tar.gz archive to post-process]
+  SDIST_PATHS...  path(s) of sdist .tar.gz archive(s) to post-process
+                  [required]
 
 Options:
+  -O, --output-dir DIRECTORY      directory in which to place the post-
+                                  processed archives (default: directory named
+                                  'postprocess' in input sdist directory)
+  -C, --create-output-dir         whether to create the output directory (and
+                                  its parents) if it does not exist
+  -f, --force                     whether to overwrite existing files in the
+                                  output directory
   --install-completion [bash|zsh|fish|powershell|pwsh]
                                   Install completion for the specified shell.
   --show-completion [bash|zsh|fish|powershell|pwsh]
