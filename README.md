@@ -9,6 +9,35 @@ containing `setuptools-rust`-based Rust extensions so that these extensions
 are marked as "optional" (cf. `optional` parameter in the
 [`setuptools-rust` API docs](https://setuptools-rust.readthedocs.io/en/latest/reference.html#setuptools_rust.RustExtension)).
 
+In other words, it takes an sdist with a `setup.py` that looks like this
+
+```python3
+from setuptools import setup
+
+setup(
+    ...
+    rust_extensions=[
+        RustExtension(...),
+    ]
+    ...
+)
+```
+
+and turns it into one that looks like this:
+
+```python3
+from setuptools import setup
+
+setup(
+    ...
+    rust_extensions=[
+        RustExtension(..., optional=True),
+    ]
+    ...
+)
+```
+
+
 ## What? Why?
 
 **What does it mean for an extension to be optional?**
