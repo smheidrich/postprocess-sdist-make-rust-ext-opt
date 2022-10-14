@@ -1,5 +1,9 @@
 # postprocess-sdist-make-rust-ext-opt
 
+[![CI badge](https://github.com/smheidrich/postprocess-sdist-make-rust-ext-opt/actions/workflows/test-build-release.yml/badge.svg)](https://github.com/smheidrich/postprocess-sdist-make-rust-ext-opt/actions/workflows/test-build-release.yml)
+[![PyPI package and version badge](https://img.shields.io/pypi/v/postprocess-sdist-make-rust-ext-opt)](https://pypi.org/project/postprocess-sdist-make-rust-ext-opt/)
+[![Supported Python versions badge](https://img.shields.io/pypi/pyversions/postprocess-sdist-make-rust-ext-opt)](https://pypi.org/project/postprocess-sdist-make-rust-ext-opt/)
+
 This is a small tool to "post-process" Python source distributions ("sdists")
 containing `setuptools-rust`-based Rust extensions so that these extensions
 are marked as "optional" (cf. `optional` parameter in the
