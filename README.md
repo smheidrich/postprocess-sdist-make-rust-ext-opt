@@ -106,9 +106,12 @@ Options:
   --help                          Show this message and exit.
 ```
 
-The processed sdist will be written to a folder named `postprocessed` in the
-same directory as the input sdist. Its filename will be the same as that of the
-input sdist.
+Unless otherwise specified, a processed sdist will be written to a folder named
+`postprocessed` in the same directory as the input sdist. Its filename will be
+the same as that of the input sdist.
+
+To modify sdists in-place, you can use the combination of options
+`-fCO dir dir/*.tar.gz`, where `dir` is the directory cotaining the sdists.
 
 ## Caveats
 
