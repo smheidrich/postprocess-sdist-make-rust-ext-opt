@@ -6,6 +6,7 @@ authors = ["smheidrich <smheidrich@weltenfunktion.de>"]
 packages = [
   { include = "postprocess_sdist_make_rust_ext_opt.py" }
 ]
+readme = "README.md"
 
 [tool.poetry.scripts]
 postprocess-sdist-make-rust-ext-opt = 'postprocess_sdist_make_rust_ext_opt:app'
