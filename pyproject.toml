@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "postprocess-sdist-make-rust-ext-opt"
-version = "0.2.1"
+version = "0.2.2"
 description = "Post-process sdists to make Rust extensions optional"
 authors = ["smheidrich <smheidrich@weltenfunktion.de>"]
 packages = [
