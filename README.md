@@ -56,7 +56,27 @@ build will be ignored. So you don't generally want to have it set as optional
 when building wheels. It only really makes sense to have it set for the sdist,
 nothing else.
 
-**Why not do it the other way round?**
+**Isn't there a way to do this dynamically without post-processing?**
+
+There is, and in fact that is the [approach recommended by
+cibuildwheel](https://cibuildwheel.readthedocs.io/en/stable/faq/#optional-extensions):
+You just make the `optional` setting in your `setup.py` dependent on some
+environment variable that tells you whether a wheel is being built or not.
+
+I thought about similar approaches before I wrote this utility, but figured
+you'd want to keep the number of "dynamic" values in `setup.py` to a minimum so
+it will be easy to port it to declarative alternatives like `setup.cfg` or
+`pyproject.toml` eventually.
+But being able to specify *any* kind of extension (even C ones) declaratively
+is [nowhere close to being implemented in setuptools](https://github.com/pypa/setuptools/issues/2220),
+and once it is, this tool in its current form won't help you anyway because
+it's just `setup.py` focused (although that could be changed then), so, to be
+honest, it's not much of an argument.
+
+If I had known about these things or thought them through properly, I probably
+wouldn't have written it 🤷
+
+**Back to postprocessing: Why not do it the other way round?**
 
 Another option would be to set the extension as optional from the start but
 change it to non-optional before the wheel build. But the issue with that is
